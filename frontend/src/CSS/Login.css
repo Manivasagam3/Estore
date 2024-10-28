@@ -1,0 +1,19 @@
+
+.log{
+  width:40%;
+  position: relative;
+  left: 32%;
+  margin-top: 7%;
+  border: solid 2px;
+  padding: 60px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+.login1{
+  margin-top: 30px;
+}
+h6{
+  position: relative;
+  left:330px;
+}
+
