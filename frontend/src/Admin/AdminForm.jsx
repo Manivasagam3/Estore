@@ -6,6 +6,7 @@ const AdminForm = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [img, setImg] = useState(null);
+  const[description,setDescription]=useState("");
 
   const handleImageChange = (e) => {
     setImg(e.target.files[0]);
@@ -14,12 +15,13 @@ const AdminForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (productname.trim() !== '' && category.trim() !== '' && price.trim() !== '' && img) {
+    if (productname.trim() !== '' && category.trim() !== '' && price.trim() !== '' && img &&description.trim()!== "") {
       const formData = new FormData();
       formData.append('name', productname);
       formData.append('category', category);
       formData.append('price', price);
       formData.append('image', img);
+      formData.append('description',description);
 
       fetch("http://localhost:8000/products", {
         method: "POST",
@@ -40,6 +42,7 @@ const AdminForm = () => {
       setProductname("");
       setCategory("");
       setPrice("");
+      setDescription("");
       setImg(null);
     }
   };
@@ -79,7 +82,14 @@ const AdminForm = () => {
           type='file'
           onChange={handleImageChange}
         /><br/>
-        <button className='btn btn-primary' type='submit'>Submit</button>
+         <label className='form-label'>Description:</label>
+        <input
+          className='form-control'
+          type='text'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        /><br/>
+        <button className='btn btn-success' type='submit'>Submit</button>
       </form>
     </div>
   );

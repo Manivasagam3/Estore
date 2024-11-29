@@ -1,10 +1,8 @@
-// src/Components/Cart.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import '../CSS/Cart.css'; // Import a separate CSS file for styles
+import '../CSS/Bag.css'; // Import a separate CSS file for styles
 
-const Cart = () => {
+const Bag = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -53,7 +51,11 @@ const Cart = () => {
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce((total, item) => {
+      const price = item.price ?? 0; // Use nullish coalescing to default to 0
+      const quantity = item.quantity ?? 0; // Use nullish coalescing to default to 0
+      return total + price * quantity;
+    }, 0);
   };
 
   return (
@@ -65,17 +67,16 @@ const Cart = () => {
             {cartItems.map((item, index) => (
               <li key={index} className="cart-item">
                 <div className="cart-item-details">
-                  <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
                   <div className="cart-item-info">
                     <span className="cart-item-name">{item.name}</span>
-                    <span className="cart-item-price">${item.price.toFixed(2)}</span>
+                    <span className="cart-item-price">${(item.price ?? 0).toFixed(2)}</span>
                     <div className="cart-item-quantity">
                       <button 
                         onClick={() => handleQuantityChange(item, 'decrease')} 
-                        disabled={item.quantity <= 1} 
+                        disabled={(item.quantity ?? 0) <= 1} 
                         className="btn-quantity"
                       >-</button>
-                      <span>{item.quantity}</span>
+                      <span>{item.quantity ?? 0}</span>
                       <button 
                         onClick={() => handleQuantityChange(item, 'increase')} 
                         className="btn-quantity"
@@ -92,7 +93,7 @@ const Cart = () => {
           </ul>
 
           <div className="cart-summary">
-            <h2>Subtotal: ${calculateTotal().toFixed(2)}</h2>
+            <h2>Subtotal: ${(calculateTotal()).toFixed(2)}</h2>
             <p>Shipping and taxes calculated at checkout.</p>
             <div className="cart-actions">
               <button onClick={handleClearCart} className="btn-clear">Clear Cart</button>
@@ -101,10 +102,13 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <p>Your cart is empty. <Link to="/">Continue shopping</Link></p>
+        <>
+          <p>Your cart is empty.</p>
+          <p>Continue Shopping</p>
+        </>
       )}
     </div>
   );
 };
 
-export default Cart;
+export default Bag;

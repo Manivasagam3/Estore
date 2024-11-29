@@ -13,7 +13,10 @@ import {
   Routes
 } from "react-router-dom";
 import Footer from '../src/Footer/Footer'
-
+import ProductDetails from './Components/ProductDetails';
+import Purchase from './Components/Purchase';
+import Success from './Components/Success';
+import Sidebar from './Components/Sidebar';
 function App() {
   return (
     <Router>
@@ -27,7 +30,11 @@ function App() {
         <Route path='/admin' element={<Admin />} />
         <Route path='/product' element={<Product />} />
         <Route path='/login' element={<Login />} />
-         
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/purchase" element={<Purchase />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<div>Payment Canceled...Retry!!!</div>} />
+        <Route path='/sidebar' element={<Sidebar/>}/>
       </Routes>
       
       <Footer/>

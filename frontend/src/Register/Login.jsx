@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../CSS/Login.css';
 import Signup from '../Register/Signup.jsx';
 import Product from '../Components/Product.jsx';
+import Sidebar from '../Components/Sidebar.jsx'; // Import Sidebar component
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -29,6 +30,7 @@ const Login = () => {
       if (data === "success") {
         window.alert("Login successful");
         setLoggedin(true);
+        setUsername(username); // Set the username to the logged-in username
       } else {
         window.alert(data);
       }
@@ -37,12 +39,13 @@ const Login = () => {
       console.log(err);
     });
 
-    setUsername("");
-    setPassword("");
+    setUsername(""); // Clear username after login attempt
+    setPassword(""); // Clear password after login attempt
   };
 
   return (
     <>
+      {/* Display Login form if not logged in */}
       {!opensign && !loggedin && (
         <div className='log'>
           <h1>Login</h1>
@@ -72,13 +75,15 @@ const Login = () => {
         </div>
       )}
 
+      {/* Show sidebar and product if logged in */}
       {loggedin && (
-        <div>
-          
-          <Product/>
+        <div className="dashboard">
+          <Sidebar username={username} /> {/* Pass username to Sidebar */}
+          <Product />
         </div>
       )}
 
+      {/* Open Signup form */}
       {opensign && (
         <Signup />
       )}

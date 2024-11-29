@@ -7,7 +7,8 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true},
     category: { type: String, required: true },
     image: { type: String, required: true },
-    price: { type: Number, required: true }
+    price: { type: Number, required: true },
+    description:{type:String,required:true}
 });
 
 const ProductModel = mongoose.model("Productitem", productSchema);
@@ -29,9 +30,20 @@ const cartItemSchema = new mongoose.Schema({
   
   const CartItem = mongoose.model('CartItem', cartItemSchema);
   
-
+  const purchaseSchema = new mongoose.Schema({
+    name: { type: String },
+    email: { type: String },
+    address: { type: String},
+    productName: { type: String},
+    productPrice: { type: Number},
+    status: { type: String},
+  }, { timestamps: true }); // Add timestamps for createdAt and updatedAt
+  
+  const PurchaseItem = mongoose.model("Purchase", purchaseSchema);
+  
 module.exports = {
     ProductModel,
     LoginModel,
-    CartItem
+    CartItem,
+    PurchaseItem
 };

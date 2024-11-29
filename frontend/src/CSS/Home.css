@@ -1,25 +1,7 @@
 /* Home.css */
 .background{
-  background-image: url("../Assets/clothes.jpg");
-  height: 93vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
+  margin-bottom: 60px;
 }
-  
-  .styleshop {
-    color: rgb(31, 16, 16);
-    padding: 5px;
-    border-radius: 20px;
-    font-weight: 5px;
-    
-    
-  }
-  
-  .styleshop button{
-    margin-top: 40%;
-    position: relative;
-    left:47%;
-  }
- 
+html,body{
+  overflow-x: hidden;
+}

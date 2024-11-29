@@ -1,0 +1,138 @@
+.purchase-page {
+  padding: 40px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f7f7f7;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.purchase-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-summary {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.product-summary h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.product-summary p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.user-details-form {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.user-details-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #f08804;
+  box-shadow: 0 0 5px rgba(240, 136, 4, 0.5);
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.payment-button {
+  background-color: #f08804;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.payment-button:hover {
+  background-color: #c76b04;
+  transform: translateY(-2px);
+}
+
+.payment-button:disabled {
+  background-color: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.size-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.size-options label {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.size-options input {
+  margin-right: 10px;
+}
+
+.size-options label:hover {
+  background-color: #f08804;
+  border-color: #f08804;
+  color: #fff;
+}
+
+.error-message {
+  color: #d9534f;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,61 @@
+.vertical-marquee {
+  position: sticky;
+  left: 0;
+  top: 7px; /* Fixed typo: added 'px' */
+  width: 200px;
+  height: 800px; /* Set height to contain the scrolling text */
+  overflow: hidden; /* Hide overflow content */
+  background-color: #f9f9f9;
+  border-left: 2px solid #ddd;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px; /* Added padding for better spacing */
+  font-family: 'Arial', sans-serif; /* Ensures clean and modern font */
+}
+
+.marquee-content {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-top 12s linear infinite; /* Animation for vertical scrolling */
+  gap: 20px; /* Adds spacing between items */
+}
+
+.marquee-content h1 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #865050;
+  margin: 10px 0;
+  text-align: center;
+
+  /* Added gradient text effect */
+  background: linear-gradient(90deg, #865050, #f06e6e, #865050);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Added text shadow for better readability */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  
+  /* Smooth transition for a glowing effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.marquee-content h1:hover {
+  /* Slight enlargement on hover */
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(240, 110, 110, 0.6);
+}
+
+/* Animation */
+@keyframes scroll-top {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+.marquee-content h1 i {
+  margin-right: 10px; /* Adds space between the icon and text */
+  font-size: 20px;    /* Adjust icon size */
+  color: #f06e6e;     /* Change icon color */
+}
+

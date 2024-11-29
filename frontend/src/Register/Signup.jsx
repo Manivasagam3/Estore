@@ -44,7 +44,7 @@ const Signup = () => {
         <div>
           <IoArrowBackCircle className='arrow' onClick={openlog} />
           <div className='sign'>
-            <h1>Signup</h1>
+            <h1 style={{color:'blue'}}>Signup</h1>
             <form className='form' onSubmit={handleSubmit}>
               <label className='form-label'>Username:</label>
               <input className='form-control' type='text' value={username} onChange={(e) => setUsername(e.target.value)} required/>

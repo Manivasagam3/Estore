@@ -5,8 +5,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const multer = require("multer");
-const { ProductModel, LoginModel,CartItem } = require("./models");
+const { ProductModel, LoginModel,CartItem,PurchaseItem} = require("./models");
 const connectDB = require("./db");
+const stripe = require("stripe")("sk_test_51PjLwDKuZlTI761y9DmOViFUvzUBLNLN1Tph9WKkJXPwtSweQGdwwbjqwaKDFhBTLv7iqdlcgw1TbPG73V4L5VZ600iyC3ywWB");
 
 
 const PORT = 8000;
@@ -27,10 +28,10 @@ const upload = multer({ storage: storage });
 // POST to /products
 app.post("/products", upload.single('image'), async (req, res) => {
     try {
-        const { name, category, price } = req.body;
+        const { name, category, price,description } = req.body;
 
         // Ensure all required fields are present
-        if (!name || !category || !price) {
+        if (!name || !category || !price || !description) {
             return res.status(400).send("Missing required fields");
         }
 
@@ -41,7 +42,8 @@ app.post("/products", upload.single('image'), async (req, res) => {
             name,
             category,
             price,
-            image: imageBase64
+            image: imageBase64,
+            description
         });
         await newProduct.save();
 
@@ -199,7 +201,81 @@ app.delete('/cart/:name', async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   });
+//productpage
+app.get('/products/:id', async (req, res) => {
+    try {
+      const product = await ProductModel.findById(req.params.id);
+      if (!product) return res.status(404).send("Product not found");
+      res.json(product);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  });
+  //payment gateway///
+  app.post("/create-checkout-session", async (req, res) => {
+    const { productName, productPrice } = req.body;
+  
+    try {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: productName,
+              },
+              unit_amount: productPrice * 100, // Amount in cents
+            },
+            quantity: 1,
+          },
+        ],
+        mode: "payment",
+        success_url: "http://localhost:3000/success?status=success",
+cancel_url: "http://localhost:3000/cancel",
+      });
+  
+      res.json({ id: session.id });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
+  //save-purchase//
+  app.post("/save-purchase", async (req, res) => {
+    try {
+    const { name, email, address, productName, productPrice, status } = req.body;
+
+    // Log request body for debugging
+    console.log("Received purchase data:", req.body);
+
+    if (!name || !email || !address || !productName || productPrice == null || !status) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+
+        const newPurchase = new PurchaseItem({
+            name,
+            email,
+            address,
+            productName,
+            productPrice,
+            status,
+        });
+
+        // Log the data before saving
+        console.log("Saving to database:", newPurchase);
+
+        await newPurchase.save();
+        res.status(200).json({ message: "Purchase data saved successfully!" });
+
+        // Log success message
+        console.log("Purchase saved successfully.");
+    } catch (error) {
+        console.error("Error saving purchase data:", error);
+        res.status(500).json({ error: "Error saving purchase data." });
+    }
+});
 
 // Listen on port
 app.listen(PORT, () => {

@@ -1,13 +1,14 @@
 
 .sign{
-    width:40%;
+    width:30%;
     position: relative;
-    left: 30%;
-    margin-top: 6%;
+    left: 35%;
+    margin-top: 2%;
     border: solid 2px;
-    padding: 60px;
+    padding: 20px;
     border-radius: 20px;
     margin-bottom: 20px;
+    animation:fadeIn 0.5s ease-in-out ;
 }
 .sign1{
     position: relative;
