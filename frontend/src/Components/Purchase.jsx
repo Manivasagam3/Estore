@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import "../CSS/Purchase.css";
 
-const stripePromise = loadStripe("pk_test_51PjLwDKuZlTI761yayQiacb7OslBlFWtjZ7SRakTESzbekyEkHEIinasqFN0Lupl2q1tWlDgLncbsVsgXJFpvlSv00F28GZsIq");
+const stripePromise = loadStripe("enter your key");
 
 const Purchase = () => {
   const { state: { product } } = useLocation();

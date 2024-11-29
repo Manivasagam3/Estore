@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const { ProductModel, LoginModel,CartItem,PurchaseItem} = require("./models");
 const connectDB = require("./db");
-const stripe = require("stripe")("sk_test_51PjLwDKuZlTI761y9DmOViFUvzUBLNLN1Tph9WKkJXPwtSweQGdwwbjqwaKDFhBTLv7iqdlcgw1TbPG73V4L5VZ600iyC3ywWB");
+const stripe = require("stripe")("enter your key");
 
 
 const PORT = 8000;
